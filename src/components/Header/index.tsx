@@ -1,21 +1,34 @@
-import logoImg from "../../assets/logo.svg";
-import { Container, Content } from "./styles";
+// import logoImg from "../../assets/logo.svg";
+// import { Container } from "./styles"; //Content
+import React, { useState } from "react";
+import { Button, Layout, Menu } from "antd";
+
+import { MenuUnfoldOutlined, MenuFoldOutlined } from "@ant-design/icons";
 
 interface HeaderProps {
-  onOpenNewTransactionModal: () => void;
+  onClickOpenMenu: () => void;
+  collapsed: boolean;
 }
 
-export function Header({ onOpenNewTransactionModal }: HeaderProps) {
+export function Header({ onClickOpenMenu, collapsed }: HeaderProps) {
+  const { Header } = Layout;
+
   return (
-    <>
-      <Container>
+    <Header
+      style={{ padding: 0, backgroundColor:'#232e44' }}
+    >
+      {/* <Container>
         <Content>
-          <img src={logoImg} alt="dt money" />
-          <button type="button" onClick={onOpenNewTransactionModal}>
-            Nova transação
+          <button type="button" onClick={onClickModal}>
+            Menu
           </button>
+          <img src={logoImg} alt="scarpress" />
         </Content>
-      </Container>
-    </>
+      </Container> */}
+      {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
+        className: "trigger",
+        onClick: onClickOpenMenu,
+      })}
+    </Header>
   );
 }

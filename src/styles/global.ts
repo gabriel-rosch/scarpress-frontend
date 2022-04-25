@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-
+import 'antd/dist/antd.css';
 export const GlobalStyle = createGlobalStyle`
     :root {
         --background: #f0f2f5;
@@ -22,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background: var(--background);
+        background: var(--shape);
         -webkit-font-smoothing: antialiased;
     }
 
@@ -48,7 +48,34 @@ export const GlobalStyle = createGlobalStyle`
     button { 
         cursor: pointer;
     }
+    .trigger {
+        padding: 0 24px;
+        font-size: 18px;
+        line-height: 64px;
+        cursor: pointer;
+        transition: color 0.3s;
+    }
 
+    .trigger:hover {
+        color: #1890ff;
+    }
+
+    .logo {
+        height: 32px;
+        margin: 16px;
+        background: rgba(255, 255, 255, 0.3);
+    }
+    .trigger {
+        color: #fff
+    }
+    .site-layout-background {
+        background: #eceff1
+
+;
+    }
+    .site-layout {
+        background: #eceff1;
+    }
     [disabled] {
         opacity: 0.6;
         cursor: not-allowed;

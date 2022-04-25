@@ -1,29 +1,52 @@
 import { GlobalStyle } from "./styles/global";
 import { Header } from "./components/Header";
-import { Dashboard } from "./components/Dashboard";
-import { useState } from 'react';
-import Modal from 'react-modal'
-import { NewTransactionModal } from "./components/NewTransactionModal";
-
-Modal.setAppElement('#root')
-
+import { useState } from "react";
+import Modal from "react-modal";
+import { Menu } from "./components/Menu";
+import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
+import routes from "./config/routes";
+import { Layout } from "antd";
+const { Content } = Layout;
+Modal.setAppElement("#root");
 export function App() {
-  const [isNewTransitionModalOpen, setIsNewTransitionModalOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
-  function handleOpenNewTransitionModal() {
-    setIsNewTransitionModalOpen(true);
+  function toggle() {
+    setCollapsed(!collapsed);
   }
 
-  function handleCloseNewTransitionModal() {
-    setIsNewTransitionModalOpen(false);
-  }
   return (
     <>
-      <Header onOpenNewTransactionModal={handleOpenNewTransitionModal}/>
-      <Dashboard />
-      
-      <NewTransactionModal isOpen={isNewTransitionModalOpen} onRequestClose={handleCloseNewTransitionModal}/>
-
+      <Layout>
+      <BrowserRouter>
+        <Menu collapsed={collapsed} />
+        <Layout className="site-layout">
+          <Header onClickOpenMenu={toggle} collapsed={collapsed} />
+          <Content
+            className="site-layout-background"
+            style={{
+              margin: "16px 11px",
+              padding: 24,
+              minHeight: 280,
+            }}
+          >
+            
+              <Switch>
+                {routes.map((route, index) => {
+                  return (
+                    <Route
+                      key={index}
+                      path={route.path}
+                      element={<route.component />}
+                    />
+                  );
+                })}
+              </Switch>
+            
+          </Content>
+        </Layout>
+        </BrowserRouter>
+      </Layout>
       <GlobalStyle />
     </>
   );
