@@ -1,11 +1,11 @@
-import {VehicleProps} from "../../types/vehicle"
+import {ClientProps} from "../../types/client"
 import { api } from "../../services/api";
 import {
     message,
   } from "antd";
-export async function create(vehicleToSubimit: VehicleProps) {
+export async function create(clientToSubimit: ClientProps) {
     return await api
-      .post<VehicleProps>("/vehicle", vehicleToSubimit)
+      .post<ClientProps>("/client", clientToSubimit)
       .catch((error) => {
         if (error.response) {
           message.warning(error.response.data.message);
@@ -17,15 +17,15 @@ export async function create(vehicleToSubimit: VehicleProps) {
         }
       }).then((response) => {
         if(response) {
-             message.success('Veiculo cadastrado!')
-             const vehicle = response.data;
-             return vehicle
+             message.success('Cliente cadastrado!')
+             const client = response.data;
+             return client
         }
     });
 }
 export async function get() {
   return await api
-      .get<any>("/vehicle")
+      .get<any>("/client")
       .catch((error) => {
         if (error.response) {
           message.warning(error.response.data.message);
@@ -37,14 +37,14 @@ export async function get() {
         }
       }).then((response) => {
         if(response) {
-             const vehicles = response.data;
-             return vehicles
+             const clients = response.data;
+             return clients
         }
     });
 }
 export async function remove(id:any) {
   return await api
-      .delete("/vehicle",id)
+      .delete("/client",id)
       .catch((error) => {
         if (error.response) {
           message.warning(error.response.data.message);
@@ -56,9 +56,9 @@ export async function remove(id:any) {
         }
       }).then((response) => {
         if(response) {
-             message.success('Veiculo excluído!')
-             const vehicle = response.data;
-             return vehicle
+             message.success('Cliente excluído!')
+             const client = response.data;
+             return client
         }
     });
 }

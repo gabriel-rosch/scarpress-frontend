@@ -1,11 +1,11 @@
-import {VehicleProps} from "../../types/vehicle"
+import {ExpenseTypeProps} from "../../types/expenseType"
 import { api } from "../../services/api";
 import {
     message,
   } from "antd";
-export async function create(vehicleToSubimit: VehicleProps) {
+export async function create(expenseTypeToSubimit: ExpenseTypeProps) {
     return await api
-      .post<VehicleProps>("/vehicle", vehicleToSubimit)
+      .post<ExpenseTypeProps>("/expenseType", expenseTypeToSubimit)
       .catch((error) => {
         if (error.response) {
           message.warning(error.response.data.message);
@@ -17,15 +17,14 @@ export async function create(vehicleToSubimit: VehicleProps) {
         }
       }).then((response) => {
         if(response) {
-             message.success('Veiculo cadastrado!')
-             const vehicle = response.data;
-             return vehicle
+             message.success('Tipo de despesa cadastrada!')
+             return response.data;  
         }
     });
 }
 export async function get() {
   return await api
-      .get<any>("/vehicle")
+      .get<any>("/expenseType")
       .catch((error) => {
         if (error.response) {
           message.warning(error.response.data.message);
@@ -37,14 +36,12 @@ export async function get() {
         }
       }).then((response) => {
         if(response) {
-             const vehicles = response.data;
-             return vehicles
-        }
+             return response.data;}
     });
 }
 export async function remove(id:any) {
   return await api
-      .delete("/vehicle",id)
+      .delete("/expenseType",id)
       .catch((error) => {
         if (error.response) {
           message.warning(error.response.data.message);
@@ -56,9 +53,8 @@ export async function remove(id:any) {
         }
       }).then((response) => {
         if(response) {
-             message.success('Veiculo excluído!')
-             const vehicle = response.data;
-             return vehicle
+             message.success('Tipo de despesa excluída!')
+             return response.data;
         }
     });
 }

@@ -3,6 +3,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { VehicleProps } from "../../types/vehicle";
 import { create, get, remove } from "./server";
+import { useEffect, useRef, useState } from "react";
+import locale from 'antd/es/date-picker/locale/pt_BR';
+import moment from "moment";
 import {
   Form,
   Row,
@@ -17,10 +20,6 @@ import {
 } from "antd";
 import {} from "antd";
 
-import { useEffect, useRef, useState } from "react";
-import moment from "moment";
-import { debug } from "console";
-
 export function Vehicle() {
   const [dataSource, setDataSource] = useState<VehicleProps[]>([]);
   const [articulateds, setArticulateds] = useState<any[]>([]);
@@ -34,7 +33,6 @@ export function Vehicle() {
     vehicleToSubimit.year = dateYear.getFullYear().toString();
     await create(vehicleToSubimit).then((vehicle) => {
       if (vehicle) {
-        debugger
         setDataSource([vehicle, ...dataSource]);
         onReset();
       }
@@ -43,7 +41,6 @@ export function Vehicle() {
   }
   async function getVehicles() {
     const vehicles = await get();
-    debugger;
     setDataSource(vehicles);
   }
   useEffect(() => {
@@ -95,9 +92,8 @@ export function Vehicle() {
             Excluir
           </a>
           <a
+          
             onClick={() => {
-              debugger
-              debugger
               if(row.year == 'NaN'){
                 let date = moment().set("year",row.year);
                 row.year = date;
@@ -195,6 +191,7 @@ export function Vehicle() {
               placeholder="Ano"
               picker="year"
               format="YYYY"
+              locale={locale}
             />
           </Form.Item>
         </Col>

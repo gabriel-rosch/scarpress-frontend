@@ -54,8 +54,10 @@ export function Menu({ collapsed }: MenuProps) {
             <Link to="/funcionario">Funcionários</Link>
           </MenuAntd.Item>
           <MenuAntd.Item key="11">
-            <Link to="/forma-pagamento">Forma de Pagamento</Link>Forma de
-            Pagamento
+            <Link to="/forma-pagamento">Forma de Pagamento</Link>
+          </MenuAntd.Item>
+          <MenuAntd.Item key="12">
+            <Link to="/tipo-despesa">Tipo de Despesa</Link>
           </MenuAntd.Item>
         </SubMenu>
       </MenuAntd>
